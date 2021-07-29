@@ -10,6 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Component
@@ -45,7 +46,7 @@ public abstract class BasicService {
      * @param <T>        Return type.
      * @return Object of type T.
      */
-    protected <T> T get(String requestUrl, Class<T> type) {
+    protected <T> T doGet(String requestUrl, Class<T> type) {
         return restTemplate.getForObject(requestUrl, type);
     }
 
@@ -73,7 +74,7 @@ public abstract class BasicService {
      * @param <T>      Expected return type of BasicRequest.
      * @return List of Callable.
      */
-    protected <T> List<Callable<T>> createCallables(List<BasicRequest<T>> requests) {
+    protected <T> List<Callable<T>> createCallables(List<Supplier<T>> requests) {
         return requests.stream().map(request -> (Callable<T>) request::get).collect(Collectors.toList());
     }
 }

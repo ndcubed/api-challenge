@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 public class DatasetService extends BasicService {
 
     public Dataset getDataset() {
-        return get("http://api.coxauto-interview.com/api/datasetId", Dataset.class);
+        return doGet("http://api.coxauto-interview.com/api/datasetId", Dataset.class);
     }
 }
