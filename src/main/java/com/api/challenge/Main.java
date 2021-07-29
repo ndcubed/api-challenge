@@ -37,9 +37,9 @@ public class Main {
     }
 
     @Bean
-    public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+    public CommandLineRunner run(RestTemplate restTemplate) {
         return args -> {
-            Dataset dataset = restTemplate.getForObject("http://api.coxauto-interview.com/api/datasetId", Dataset.class);
+            Dataset dataset = datasetService.getDataset();
 
             if (dataset != null) {
                 // Obtain List of Vehicle in parallel.
